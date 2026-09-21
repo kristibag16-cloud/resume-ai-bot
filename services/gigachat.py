@@ -10,7 +10,7 @@ class GigaChatService:
         self.client = GigaChat(
             credentials=settings.gigachat_credentials,
             model=settings.gigachat_model,
-            verify_ssl_certs=False,  # на время разработки
+            verify_ssl_certs=False,
             timeout=90,
         )
 
@@ -26,5 +26,12 @@ class GigaChatService:
             Messages(role=MessagesRole.USER, content=user_prompt),
         ]
 
-        response = await self.client.achat(Chat(messages=messages))
+        response = await self.client.achat(
+            Chat(
+                messages=messages,
+                temperature=0.1,      # почти без креативности
+                top_p=0.3,
+                max_tokens=2000
+            )
+        )
         return response.choices[0].message.content.strip()
