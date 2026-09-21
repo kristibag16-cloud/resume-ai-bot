@@ -13,7 +13,7 @@ class Settings(BaseSettings):
     gigachat_credentials: str
     admin_ids: List[int] = []
 
-    gigachat_model: str = "GigaChat-Pro"
+    gigachat_model: str = "GigaChat"
 
 
 settings = Settings()
